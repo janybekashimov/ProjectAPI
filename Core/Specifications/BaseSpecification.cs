@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace Core.Specifications
 {
@@ -11,8 +6,8 @@ namespace Core.Specifications
     {
         public BaseSpecification()
         {
-
         }
+
         public BaseSpecification(Expression<Func<T, bool>> criteria)
         {
             Criteria = criteria;
@@ -20,7 +15,7 @@ namespace Core.Specifications
 
         public Expression<Func<T, bool>> Criteria { get; }
 
-        public List<Expression<Func<T, object>>> Includes { get; } = 
+        public List<Expression<Func<T, object>>> Includes { get; } =
             new List<Expression<Func<T, object>>>();
 
         protected void AddInclude(Expression<Func<T, object>> includeExpression)

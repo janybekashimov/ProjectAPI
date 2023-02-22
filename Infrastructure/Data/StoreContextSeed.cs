@@ -1,11 +1,6 @@
 ﻿using Core.Entities;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
@@ -13,22 +8,22 @@ namespace Infrastructure.Data
     {
         public static async Task SeenAsync(StoreContext context, ILoggerFactory loggerFactory)
         {
-			try
-			{
-				if (!context.ProductBrands.Any())
-				{
-					var brandsData = 
-						File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
+            try
+            {
+                if (!context.ProductBrands.Any())
+                {
+                    var brandsData =
+                        File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
 
-					var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
+                    var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
-					foreach (var item in brands.ToList())
-					{
-						context.ProductBrands.Add(item);
-					}
+                    foreach (var item in brands.ToList())
+                    {
+                        context.ProductBrands.Add(item);
+                    }
 
-					await context.SaveChangesAsync();
-				}
+                    await context.SaveChangesAsync();
+                }
 
                 if (!context.ProductTypes.Any())
                 {
@@ -60,11 +55,11 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
             }
-			catch (Exception ex)
-			{
-				var logger = loggerFactory.CreateLogger<StoreContextSeed>();
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex.Message);
-			}
+            }
         }
     }
 }
