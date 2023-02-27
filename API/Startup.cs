@@ -47,7 +47,11 @@ namespace API
             app.UseRouting();
 
             app.UseStaticFiles();
-            app.UseCors();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
